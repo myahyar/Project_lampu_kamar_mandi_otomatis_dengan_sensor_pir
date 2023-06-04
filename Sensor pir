@@ -1,1 +1,40 @@
 
+
+int pir = 2;     
+int relay = 4;   
+int statusPIR = 0;  
+
+void setup(){
+
+Serial.begin(9600);  
+pinMode(pir, INPUT);     
+pinMode(relay, OUTPUT);
+digitalWrite(relay,HIGH); 
+         
+}
+int td=0;
+void loop(){
+
+statusPIR = digitalRead(pir);
+if (statusPIR ==HIGH) {
+    td=0;            
+    Serial.println("terdeteksi");
+    delay(1000);
+    digitalWrite(relay,LOW);
+    }
+   
+    
+    
+if(statusPIR==LOW){
+     td++;
+        Serial.println(td);
+         Serial.println("tidak terdeteksi");
+     delay(1000);
+     }     
+ 
+     if(td==20){
+        digitalWrite(relay,HIGH);
+        td=0;
+        
+    }
+}
